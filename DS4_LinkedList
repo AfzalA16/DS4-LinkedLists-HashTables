@@ -1,0 +1,105 @@
+
+
+public class DS4_LinkedList<E> implements DS4_LinkedList_Interface<E>
+{
+
+    DS4_LinkedList_Node<E> head= new DS4_LinkedList_Node<E>(null);
+    DS4_LinkedList_Node<E> tail= new DS4_LinkedList_Node<E>(null);
+
+
+
+    @Override
+    public DS4_LinkedList_Node getFirstNode()
+    {
+        return head;
+
+    }
+
+    @Override
+    public DS4_LinkedList_Node getLastNode()
+    {
+        return tail;
+    }
+
+    @Override
+    public E getFirst()
+    {
+        return head.getData();
+
+    }
+
+    @Override
+    public E getLast()
+    {
+        return tail.getData();
+    }
+
+    @Override
+    public E removeFirst()
+    {
+        DS4_LinkedList_Node<E> newFirstNode= head.getNext();
+        E value= head.getData();
+        head=newFirstNode;
+         return value;
+
+    }
+
+    @Override
+    public E removeLast()
+    {
+        return null;
+    }
+
+    @Override
+    public void addFirst(Object data)
+    {
+        DS4_LinkedList_Node<E> newNode= new DS4_LinkedList_Node<>(null);
+        newNode.setData((E) data);
+        newNode.setNext(head);
+
+    }
+
+    @Override
+    public void addLast(Object data)
+    {
+        DS4_LinkedList_Node<E> newNode= new DS4_LinkedList_Node<>(null);
+        newNode.setData((E) data);
+        tail.setNext(newNode);
+    }
+
+    @Override
+    public void clear()
+    {
+
+    }
+
+    @Override
+    public int size() {
+        return 0;
+    }
+
+    @Override
+    public E get(int x) {
+        return null;
+    }
+
+    @Override
+    public void add(int x, Object data) {
+
+    }
+
+    @Override
+    public E remove(int x) {
+        return null;
+    }
+
+    @Override
+    public E set(int x, E data) {
+        return null;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+}
