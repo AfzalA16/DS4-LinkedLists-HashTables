@@ -9,14 +9,14 @@ public class DS4_LinkedList<E> implements DS4_LinkedList_Interface<E>
 
 
     @Override
-    public DS4_LinkedList_Node getFirstNode()
+    public DS4_LinkedList_Node<E> getFirstNode()
     {
         return head;
 
     }
 
     @Override
-    public DS4_LinkedList_Node getLastNode()
+    public DS4_LinkedList_Node<E> getLastNode()
     {
         return tail;
     }
@@ -47,15 +47,37 @@ public class DS4_LinkedList<E> implements DS4_LinkedList_Interface<E>
     @Override
     public E removeLast()
     {
-        return null;
+        DS4_LinkedList_Node<E> newLastNode = new DS4_LinkedList_Node<>(null);
+        newLastNode=head;
+        while (newLastNode.getNext()!=tail)
+        {
+            newLastNode=newLastNode.getNext();
+        }
+        //by now the node should have its next node be last
+        E value= tail.getData();
+        tail=newLastNode;
+        return value;
+
+
     }
 
     @Override
-    public void addFirst(Object data)
+    public void addFirst(E data)
     {
-        DS4_LinkedList_Node<E> newNode= new DS4_LinkedList_Node<>(null);
-        newNode.setData((E) data);
-        newNode.setNext(head);
+        DS4_LinkedList_Node<E> newHead= new DS4_LinkedList_Node<>(null);
+
+        newHead.setData(data);
+
+        DS4_LinkedList_Node<E> newHeadNext= new DS4_LinkedList_Node<>(null);
+
+        newHeadNext=head;
+
+        head=newHead;
+
+        head.setNext(newHeadNext);
+
+
+
 
     }
 
@@ -70,17 +92,37 @@ public class DS4_LinkedList<E> implements DS4_LinkedList_Interface<E>
     @Override
     public void clear()
     {
+        head=null;
+        tail=null;
 
     }
 
     @Override
-    public int size() {
-        return 0;
+    public int size()
+    {
+        int count=0;
+        DS4_LinkedList_Node<E> nodeCycle= new DS4_LinkedList_Node<>(null);
+        nodeCycle=head;
+        while (nodeCycle!=null)
+        {
+            count++;
+            nodeCycle=nodeCycle.getNext();
+        }
+        return count;
     }
 
     @Override
-    public E get(int x) {
-        return null;
+    public E get(int x)
+    {
+        DS4_LinkedList_Node<E> nodeCycle= new DS4_LinkedList_Node<>(null);
+        nodeCycle=head;
+        for (int i=0; i<x;i++)
+        {
+            nodeCycle=nodeCycle.getNext();
+        }
+        // by now nodecycle should be EQUAL to index x
+        return nodeCycle.getData();
+
     }
 
     @Override
@@ -99,7 +141,38 @@ public class DS4_LinkedList<E> implements DS4_LinkedList_Interface<E>
     }
 
     @Override
-    public boolean isEmpty() {
-        return false;
+    public boolean isEmpty()
+    {
+        if (head==null&&tail==null)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+    public String toString()
+    {
+        if (isEmpty())
+        {
+            return "";
+        }
+
+        DS4_LinkedList_Node<E> nodeCycle= new DS4_LinkedList_Node<>(null);
+        nodeCycle=head;
+        String s="[";
+        while (true)
+        {
+            if (nodeCycle.getNext()==null)
+            {
+                s+=nodeCycle.getData()+"]";
+                return s;
+
+            }
+            else
+            {
+               s+=nodeCycle+", ";
+            }
+            nodeCycle=nodeCycle.getNext();
+        }
     }
 }
